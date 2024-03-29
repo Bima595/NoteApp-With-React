@@ -4,9 +4,8 @@ import React, { useState } from "react";
 import "./../styles/index.css"; // Import file CSS di sini
 import Home from "./Home";
 import Note from "./Note";
-import NoteDetail from "./NoteDetail"; // Import NoteDetail
-import NotFound from "./NotFound"; // Import NotFound
-import SearchResult from "./SearchResult"; // Import SearchResult
+import DetailCatatan from "./DetailCatatan.jsx";
+// import SearchResult from "./SearchResult"; // Import SearchResult
 import Navbar from "./navbar"; // Import Navbar
 import { initialData } from "./../utils/index.js"; // Import initialData dari utils
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Routes dan Route
@@ -55,7 +54,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar handleSearchChange={handleSearchChange} handleSearch={handleSearch} />{" "}
+        <Navbar
+          handleSearchChange={handleSearchChange}
+          handleSearch={handleSearch}
+        />{" "}
         {/* Tampilkan Navbar di atas Routes */}
         <Routes>
           <Route path="/" element={<Home tambahCatatan={tambahCatatan} />} />
@@ -71,12 +73,13 @@ function App() {
           />
           <Route
             path="/note/:id"
-            element={<NoteDetail catatan={catatan} />}
-          />
-          <Route path="/not-found" element={<NotFound />} />
-          <Route
-            path="/search/:id"
-            element={<SearchResult catatan={catatan} />}
+            element={
+              <DetailCatatan
+                catatan={catatan}
+                hapusCatatan={hapusCatatan}
+                toggleArchive={toggleArchive}
+              />
+            }
           />
         </Routes>
       </div>

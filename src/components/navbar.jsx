@@ -4,16 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ handleSearchChange, handleSearch, history }) => {
-  const handleClick = () => {
-    const searchResult = handleSearch();
-    if (searchResult) {
-      history.push(`/search/${searchResult.id}`);
-    } else {
-      history.push("/not-found");
-    }
-  };
-
+const Navbar = ({ handleSearchChange }) => {
   return (
     <nav className="navbar">
       <ul>
@@ -29,15 +20,12 @@ const Navbar = ({ handleSearchChange, handleSearch, history }) => {
         placeholder="Search..."
         onChange={handleSearchChange}
       />
-      <button onClick={handleClick}>Search</button>
     </nav>
   );
 };
 
 Navbar.propTypes = {
   handleSearchChange: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
 };
 
 export default Navbar;
