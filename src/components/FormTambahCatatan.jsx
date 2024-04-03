@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
 function FormTambahCatatan({ tambahCatatan }) {
   const [judul, setJudul] = useState("");
   const [isi, setIsi] = useState("");
@@ -10,7 +10,12 @@ function FormTambahCatatan({ tambahCatatan }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (judul.trim() !== "" && isi.trim() !== "") {
-      tambahCatatan({ title: judul, body: isi, archived, createdAt: new Date().toISOString() });
+      tambahCatatan({
+        title: judul,
+        body: isi,
+        archived,
+        createdAt: new Date().toISOString(),
+      });
       setJudul("");
       setIsi("");
       setArchived(false);
@@ -18,7 +23,6 @@ function FormTambahCatatan({ tambahCatatan }) {
       alert("Judul dan isi catatan harus diisi!");
     }
   }
-  
 
   function handleToggleArchived() {
     setArchived(!archived); // Toggle nilai archived
@@ -57,5 +61,9 @@ function FormTambahCatatan({ tambahCatatan }) {
     </form>
   );
 }
+
+FormTambahCatatan.propTypes = {
+  tambahCatatan: PropTypes.func.isRequired,
+};
 
 export default FormTambahCatatan;

@@ -22,7 +22,7 @@ const Catatan = ({ id, title, body, archived, createdAt, hapusCatatan, toggleArc
 }
 
 Catatan.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,

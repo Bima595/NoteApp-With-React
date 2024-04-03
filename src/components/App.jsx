@@ -7,15 +7,16 @@ import Note from "./Note";
 import DetailCatatan from "./DetailCatatan.jsx";
 // import SearchResult from "./SearchResult"; // Import SearchResult
 import Navbar from "./navbar"; // Import Navbar
-import { initialData } from "./../utils/index.js"; // Import initialData dari utils
+import { initialData } from "./../utils/local-data.js"; // Import initialData dari utils
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Routes dan Route
+import { v4 as uuidv4 } from "uuid"; // Import uuid untuk membuat id yang unik
 
 function App() {
   const [catatan, setCatatan] = useState(initialData);
   const [searchTerm, setSearchTerm] = useState("");
 
   function tambahCatatan(newCatatan) {
-    const id = catatan.length + 1;
+    const id = uuidv4(); // Gunakan uuid untuk membuat id yang unik
     const createdAt = new Date().toISOString();
     const updatedCatatan = [...catatan, { id, ...newCatatan, createdAt }];
     setCatatan(updatedCatatan);
@@ -57,8 +58,7 @@ function App() {
         <Navbar
           handleSearchChange={handleSearchChange}
           handleSearch={handleSearch}
-        />{" "}
-        {/* Tampilkan Navbar di atas Routes */}
+        />
         <Routes>
           <Route path="/" element={<Home tambahCatatan={tambahCatatan} />} />
           <Route

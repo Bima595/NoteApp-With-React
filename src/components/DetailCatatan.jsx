@@ -1,25 +1,26 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import PropTypes from "prop-types";
-import Catatan from "./Catatan";
 import { useParams } from "react-router-dom";
 
 const DetailCatatan = ({ catatan, hapusCatatan, toggleArchive }) => {
   const { id } = useParams();
-  const note = catatan.find((note) => note.id === parseInt(id));
 
-  if (!note) {
-    return <p>Catatan tidak ditemukan</p>;
+  // Temukan catatan berdasarkan id dari params
+  const selectedCatatan = catatan.find((note) => note.id === id);
+
+  if (!selectedCatatan) {
+    return <div>Catatan tidak ditemukan</div>;
   }
 
   return (
     <div>
-      <Catatan
-        key={note.id}
-        {...note}
-        hapusCatatan={() => hapusCatatan(note.id)}
-        toggleArchive={() => toggleArchive(note.id)}
-      />
+      <h1>{selectedCatatan.title}</h1>
+      <p>{selectedCatatan.body}</p>
+      <button onClick={() => hapusCatatan(selectedCatatan.id)}>Hapus</button>
+      <button onClick={() => toggleArchive(selectedCatatan.id)}>
+        {selectedCatatan.archived ? "Batal Arsip" : "Arsipkan"}
+      </button>
     </div>
   );
 };
